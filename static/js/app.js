@@ -1,82 +1,49 @@
+ // Select the submit button
+ var submit = d3.select("#filter-btn");
 
-function buildMetadata(sample) {
-  var MetaData = `/metadata/${sample}`;
-  d3.json(MetaData).then(function(response) {
+ // XXXX window.addEventListener('load', () => {displayTable(data)});
+ submit.on("click", handleClick);
+
+ function handleClick() {
  
-  var panelData = d3.select("#sample-metadata");
-  panelData.html("");
+   // Prevent the page from refreshing
+   d3.event.preventDefault();
  
-  var data = Object.entries(response);
-  data.forEach(function(item) {
-  panelData.append("div").text(item);
- });
- })}
+   // Select the input element and get the raw HTML node
+   var inputElement = d3.select("#TextEnter");
+ 
+   // Get the value property of the input element
+   var inputValue = inputElement.property("value");
+ 
+   // check value
+   console.log(inputValue);
+   
+   // filter data based on input value
+   var filteredData = data.filter(DateRow => DateRow.datetime === inputValue);
+   
+   // run fucntion to display table according to selected data
+   displayTable(filteredData);
+ };
 
-function buildCharts(sample) {
-  var sampleData = `/samples/${sample}`;
-  
-  d3.json(sampleData).then(function(response){
-    var topTenOtuIds = response.otu_ids.slice(0,10);
-    var topOtuLabels = response.otu_labels.slice(0,10);
-    var topTenSampleValues = response.sample_values.slice(0,10);
-    var data = [{
-      "labels": topTenOtuIds,
-      "values": topTenSampleValues,
-      "hovertext": topOtuLabels,
-      "type": "pie"
-    }];
-    
-  Plotly.newPlot('pie', data);
+// Building the function to display table
+function displayTable(anyinput){
 
-  d3.json(sampleData).then(function(response){
-    var bubbleOtuIds = response.otu_ids;
-    var bubbleOuLabels = response.otu_labels;
-    var bubbleSampleValues = response.sample_values;
+//selecting body
+var tbody = d3.select("tbody");
 
-    var bubbleChartData = {
-      mode: 'markers',
-      x: bubbleOtuIds,
-      y: bubbleSampleValues,
-      text: bubbleOuLabels,
-      marker: {color: bubbleOtuIds, colorscale: 'Rainbow', size: bubbleSampleValues}
-    };
+//empty the table
+tbody.html("");
 
-    var bblData = [bubbleChartData];
+// for each row of filtered data
+anyinput.forEach(function(DateRow) {
+   // append tr
+   var row = tbody.append("tr");
+   //append a cell for each [key, value] pair
+   Object.entries(DateRow).forEach(function([key, value]) {
+    //Append a cell to the row for each value in the weather report object
+    var cell = tbody.append("td");
+    cell.text(value);
+   });
+});
 
-    var layout = {
-      showlegend: false,
-      height: 600,
-      width: 1200
-      };
-    
-    Plotly.newPlot('bubble', bblData, layout); 
-  })
-})
-}function init() {
-  // Grab a reference to the dropdown select element
-  var selector = d3.select("#selDataset");
-
-  // Use the list of sample names to populate the select options
-  d3.json("/names").then((sampleNames) => {
-    sampleNames.forEach((sample) => {
-      selector
-        .append("option")
-        .text(sample)
-        .property("value", sample);
-    });
-
-    // Use the first sample from the list to build the initial plots
-    const firstSample = sampleNames[0];
-    buildCharts(firstSample);
-    buildMetadata(firstSample);
-  });
-}
-
-function optionChanged(newSample) {
-  // Fetch new data each time a new sample is selected
-  buildCharts(newSample);
-  buildMetadata(newSample);
-}
-
-// Initialize the dashboard
-init();
+};
