@@ -13,7 +13,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-
 #################################################
 # Database Setup
 #################################################
@@ -23,19 +22,69 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+# reflect an existing database into a new model
 Base = automap_base()
+# reflect the tables
 Base.prepare(db.engine, reflect=True)
 
-shows = Base.classes.tv_maze
+Base.classes.keys()
 
-stmt = db.session.query(shows).statement
-data = pd.read_sql_query(stmt, db.session.bind)
-print(data)
+ShowsData=Base.classes.tv_maze
+
+
 
 @app.route("/")
 def index():
     """Return the homepage."""
     return render_template("index.html")
+
+
+@app.route("/names")
+def names():
+    """Return a list of sample names."""
+
+    # Use Pandas to perform the sql query
+    stmt = db.session.query(ShowsData).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+
+    # Return a list of the column names (sample names)
+    return jsonify(list(df['name']))
+
+
+@app.route("/description/<name>")
+def description_name(name):
+    """Return the MetaData for a given sample."""
+    sel = [
+        ShowsData.name,
+        ShowsData.url,
+        ShowsData.language,
+        ShowsData.genre,
+        ShowsData.premiered,
+        ShowsData.rating,
+        ShowsData.country,
+        ShowsData.image,
+        ShowsData.summary,
+        ShowsData.updated
+    ]
+
+    results = db.session.query(*sel).filter(ShowsData.name == name).all()
+
+    # Create a dictionary entry for each row of metadata information
+    description_name = {}
+    for result in results:
+        description_name["name"] = result[0]
+        description_name["url"] = result[1]
+        description_name["language"] = result[2]
+        description_name["genre"] = result[3]
+        description_name["premiered"] = result[4]
+        description_name["rating"] = result[5]
+        description_name["country"] = result[6]
+        description_name["image"] = result[7]
+        description_name["summary"] = result[8]
+        description_name["updated"] = result[9]
+
+    #print(description_name)
+    return jsonify(description_name)
 
 if __name__ == "__main__":
     app.run()
