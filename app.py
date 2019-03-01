@@ -38,6 +38,9 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+@app.route("/charts.html")
+def charts():
+    return render_template('charts.html')
 
 @app.route("/names")
 def names():
@@ -49,7 +52,6 @@ def names():
 
     # Return a list of the column names (sample names)
     return jsonify(list(df['name']))
-
 
 @app.route("/description/<name>")
 def description_name(name):
@@ -85,6 +87,33 @@ def description_name(name):
 
     #print(description_name)
     return jsonify(description_name)
+
+@app.route("/all")
+def all():
+    
+    sel = [
+        ShowsData.name,
+        ShowsData.language,
+        ShowsData.genre,
+        ShowsData.premiered,
+        ShowsData.rating,
+        ShowsData.country,
+    ]
+
+    results = db.session.query(*sel).all()
+
+    shows = []
+    for result in results:
+        data = {}
+        data["name"] = result[0]
+        data["language"] = result[1]
+        data["genre"] = result[2]
+        data["premiered"] = result[3]
+        data["rating"] = result[4]
+        data["country"] = result[5]
+        shows.append(data)
+
+    return jsonify(shows)
 
 if __name__ == "__main__":
     app.run()
