@@ -48,9 +48,7 @@ d3.json("/all").then((shows) => {
       }, {});
     return avgs;
   }
-
-
-
+  
     //    a.sum[val] = a.sum[val] + parseFloat(row.rating)
 
 
