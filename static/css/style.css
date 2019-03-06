@@ -15,7 +15,7 @@ body {
 .wrapper {
   position: relative;
   min-height: 100%;
-  padding-bottom: 130px;
+  padding-bottom: 80px;
   overflow: auto;
 }
 
@@ -25,7 +25,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  min-height: 100px;
+  min-height: 30px;
   background: #4e5d6c;
 }
 
@@ -92,6 +92,10 @@ select {
   margin-top: 50px;
 }
 
+.margin-top-100 {
+  margin-top: 100px;
+}
+
 /* The styles for the parallax */
 .hero {
   position: relative;
@@ -106,7 +110,7 @@ select {
 }
 
 .hero h1 {
-  margin-top: 200px;
+  margin-top: 150px;
   font-size: 0.1rem;
   animation: title 1.2s forwards linear;
   color: black;
@@ -118,6 +122,15 @@ select {
   animation: subtitle 1.2s forwards linear;
   animation-delay: 1.2s;
   color: black;
+}
+
+.hero a {
+  font-size: 2rem;
+  opacity: 0;
+  animation: subtitle 1.2s forwards linear;
+  animation-delay: 1.s;
+  color: black;
+   
 }
 
 /* input placeholder color changes */
@@ -139,6 +152,17 @@ select {
 .form-control:-moz-placeholder {
   /* Firefox 18- */
   color: #8e979f;
+}
+
+#map-id {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
 
 /* media queries which will only be activated at specific screen sizes */

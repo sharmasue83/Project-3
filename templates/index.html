@@ -16,58 +16,52 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="index.html">TV Series
-            <img class="nav-camera" src="../static/images/Camera.svg">
+            <img class="nav-camera" alt='Camera Film' src="../static/images/Camera.svg">
           </a>
-        </div>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right navbar-right-custom">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Plots <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                 <li><a href="visualizations/temp.html">Max Temperature</a></li>
+                  <li><a href="visualizations/humidity.html">Humidity</a></li>
+                  <li><a href="visualizations/cloudiness.html">Cloudiness</a></li>
+                  <li><a href="visualizations/wind.html">Wind Speed</a></li>
+                </ul>
+              </li>
 
-        <div class="navbar-header">
-          <a class="navbar-brand" href="charts.html">Charts</a>
+            <li><a href="/description1">Description</a></li>
+            <li><a href="/map">Map</a></li>
+            <li><a href="/chart">Charts</a></li>
+          </ul>
         </div>
-
-      </div>
     </nav>
     <div class="hero text-center">
       <h1>TV Series</h1>
       <p>All you need to know</p>
+      <div class="row margin-top-100">
+        <div class="col-md-4">      
+          <a href="/description1">DESCRIPTION</a>
+        </div>
+        <div class="col-md-4">      
+          <a  href="/map">MAP</a>
+        </div>
+        <div class="col-md-4">      
+          <a  href="/chart">CHARTS</a>
+        </div>
     </div>
-    <div class="container">
-      <div class="row margin-top-50">
-        <div class="col-md-2">
-          <aside class="filters">
-            <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <ul class="list-group" id="filters">
-                      <li class="filter list-group-item">
-                        <label for="date">TV Series:</label>
-                        <input class="form-control" id="TextEnter" type="text" placeholder="Enter TV Serie">
-                      </li>
-                    </ul>
-                  </div>
-                  <button id="filter-btn" type="submit" class="btn btn-default">Show Description </button>
-                </form>
-              </div>
-            </div>
-          </aside>
-        </div>
-        <div class="col-md-10">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Sample MetaData</h3>
-                </div>
-                <div id="sample-metadata" class="panel-body"></div>
-              </div>
-            </div>
-        </div>
-      
-     <footer class="footer">
+  </div>
+  <div class="container">
+  <footer class="footer">
       <span class="bottom">TV series</span>
     </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.js"></script>
+   <!--<script src="static/js/data.js"></script>-->
   <script src="../static/js/app.js"></script>
+
 </body>
 
 </html>

@@ -8,8 +8,10 @@ from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, abort
 from flask_sqlalchemy import SQLAlchemy
+
+from jinja2 import TemplateNotFound
 
 app = Flask(__name__)
 
@@ -32,15 +34,25 @@ Base.classes.keys()
 ShowsData=Base.classes.tv_maze
 
 
+@app.route('/', defaults={'page': 'index'})
+@app.route('/<page>')
+def html_lookup(page):
+    try:
+        return render_template('{}.html'.format(page))
+    except TemplateNotFound:
+        abort(404)
 
-@app.route("/")
-def index():
-    """Return the homepage."""
-    return render_template("index.html")
 
-@app.route("/charts.html")
-def charts():
-    return render_template('charts.html')
+# @app.route("/")
+# def index():
+#     """Return the homepage."""
+#     return render_template("index.html")
+
+# @app.route("/description1")
+# def desc():
+#     """Return the homepage."""
+#     return render_template("description1.html")
+
 
 @app.route("/names")
 def names():
@@ -52,6 +64,7 @@ def names():
 
     # Return a list of the column names (sample names)
     return jsonify(list(df['name']))
+
 
 @app.route("/description/<name>")
 def description_name(name):
@@ -90,30 +103,30 @@ def description_name(name):
 
 @app.route("/all")
 def all():
-    
-    sel = [
-        ShowsData.name,
-        ShowsData.language,
-        ShowsData.genre,
-        ShowsData.premiered,
-        ShowsData.rating,
-        ShowsData.country,
-    ]
 
-    results = db.session.query(*sel).all()
+   sel = [
+       ShowsData.name,
+       ShowsData.language,
+       ShowsData.genre,
+       ShowsData.premiered,
+       ShowsData.rating,
+       ShowsData.country,
+   ]
 
-    shows = []
-    for result in results:
-        data = {}
-        data["name"] = result[0]
-        data["language"] = result[1]
-        data["genre"] = result[2]
-        data["premiered"] = result[3]
-        data["rating"] = result[4]
-        data["country"] = result[5]
-        shows.append(data)
+   results = db.session.query(*sel).all()
 
-    return jsonify(shows)
+   shows = []
+   for result in results:
+       data = {}
+       data["name"] = result[0]
+       data["language"] = result[1]
+       data["genre"] = result[2]
+       data["premiered"] = result[3]
+       data["rating"] = result[4]
+       data["country"] = result[5]
+       shows.append(data)
+
+   return jsonify(shows)
 
 if __name__ == "__main__":
     app.run()
