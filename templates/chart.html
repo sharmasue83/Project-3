@@ -15,55 +15,26 @@
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="../templates/index.html">TV Series
+          <a class="navbar-brand" href="index.html">TV Series
             <img class="nav-camera" src="../static/images/Camera.svg">
           </a>
         </div>
       </div>
     </nav>
-    <div class="hero text-center">
-      <h1>TV Series</h1>
-      <p>All you need to know</p>
+
+  <body>
+  <div class="container">
+    <div class="row">
+    <div class="row">
+      <div class="col-xs-12  col-md-9">
+        <div id="barchart">
+        </div>
+      </div>
     </div>
-    <div class="container">
-      <div class="row margin-top-50">
-        <div class="col-md-2">
-          <aside class="filters">
-            <div class="panel panel-default">
-              <div class="panel-heading">Filter Search</div>
-              <div class="panel-body">
-                <form>
-                  <div class="form-group">
-                    <ul class="list-group" id="filters">
-                      <li class="filter list-group-item">
-                        <label for="date">TV Serie:</label>
-                        <input class="form-control" id="TextEnter" type="text" placeholder="Enter TV Serie">
-                      </li>
-                    </ul>
-                  </div>
-                  <button id="filter-btn" type="submit" class="btn btn-default">Show Description </button>
-                </form>
-              </div>
-            </div>
-          </aside>
-        </div>
-        <div class="col-md-10">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Sample MetaData</h3>
-                </div>
-                <div id="sample-metadata" class="panel-body"></div>
-              </div>
-            </div>
-        </div>
-      
-     <footer class="footer">
-      <span class="bottom">TV series</span>
-    </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js"></script>
-  <script src="static/js/data.js"></script>
-  <script src="../static/js/app.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="../static/js/chart.js"></script>
 </body>
 
 </html>
