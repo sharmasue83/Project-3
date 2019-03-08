@@ -48,12 +48,6 @@ def html_lookup(page):
 #     """Return the homepage."""
 #     return render_template("index.html")
 
-# @app.route("/description1")
-# def desc():
-#     """Return the homepage."""
-#     return render_template("description1.html")
-
-
 @app.route("/names")
 def names():
     """Return a list of sample names."""
