@@ -136,9 +136,8 @@ select {
 }
 
 #map {
-  height: 100%;
-  padding: 0;
-  margin: 0;
+  height: 800px;
+  width: 100%;
 }
 
 .img-fluid {
