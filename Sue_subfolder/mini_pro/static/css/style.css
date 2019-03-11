@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    font-family: Ubuntu, sans-serif;
+  }
+  
+  html,
+  body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+
+
+
+
+.nav-image {
+    float:left;
+    top: 50px;
+    left: 110px;
+    width: 50px;
+    height: 50px;
+    
+}
+
+.mid-head {
+    float: inherit;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 700px;
+    padding-right: 700px;
+    display: inline-block;
+    padding-top:20px;
+    padding-bottom:20px;
+    text-align: center;
+
+}
+
+.background {
+    position: relative;
+    height: 700px;
+    padding: 10px;
+    margin: 0;
+    background-image: url("../image/recall.jpg");
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: cover;
+  }
+
+  .wrapper {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 80px;
+    overflow: auto;
+  }
+
+  #rightone {
+      float: right;
+      padding-bottom:  0px;
+      padding-top: 40px;
+
+
+
+  }
